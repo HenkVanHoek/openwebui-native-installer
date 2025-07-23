@@ -45,7 +45,25 @@
   <div class="container">
     <h1>🚀 Open WebUI Native Installer</h1>
     <p>This is a minimal Ubuntu-based native installer for <strong>Open WebUI</strong> (with Ollama backend support).</p>
-
+      <h3>⚙️ Prerequisites</h3>
+      
+      <p>Make sure your system meets the following requirements before installing:</p>
+      
+      <ul>
+        <li>✅ <strong>Ubuntu Server 22.04 or newer</strong></li>
+        <li>✅ <strong>Outbound internet access</strong> (for downloading packages and dependencies)</li>
+        <li>✅ <strong><code>curl</code> installed</strong><br>
+          <pre><code>sudo apt update &amp;&amp; sudo apt install curl -y</code></pre>
+        </li>
+        <li>✅ <strong>VM must be able to connect to your Ollama host on port <code>11434</code></strong><br>
+          <ul>
+            <li>On your <strong>Windows PC</strong>, ensure Ollama is running and listening at:<br>
+              <code>http://&lt;host-ip&gt;:11434</code>
+            </li>
+            <li>Your <strong>VM</strong> should use <em>bridged</em> or <em>host-only networking</em> to reach this IP and port.</li>
+          </ul>
+        </li>
+      </ul>
     <h2>🔧 Quick Install</h2>
     <p>Run this command on your Ubuntu VM:</p>
     <pre><code>curl -sL https://henkvanhoek.github.io/openwebui-native-installer/install.sh | bash</code></pre>
