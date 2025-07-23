@@ -1,0 +1,36 @@
+# .gitignore
+Here’s a recommended `.gitignore` to include in the root of your repo:
+
+````gitignore
+# Byte-compiled / cache files
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environment
+venv/
+ENV/
+env/
+.venv/
+
+# Node modules
+frontend/node_modules/
+
+# Build output
+frontend/dist/
+frontend/.next/
+frontend/out/
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+
+# Editor-specific files
+.vscode/
+.idea/
+
+# Environment files
+backend/.env
+
+# Logs
+*.log
