@@ -1,32 +1,31 @@
-# Native Open WebUI Installer (No Docker)
+# 🧠 Native Open WebUI Installer (No Docker)
 
-This project provides a lightweight script to install [Open WebUI](https://github.com/open-webui/open-webui) **natively** on a minimal Ubuntu Server 22.04 LTS machine — **without using Docker**.
+This project provides a lightweight script to install **Open WebUI** natively on a minimal Ubuntu Server 22.04 LTS machine — without Docker.
 
 It’s perfect for:
-- Lightweight VirtualBox or Proxmox VMs
-- Headless local servers
-- Developers who prefer native environments over containers
+- Lightweight VirtualBox or Proxmox VMs  
+- Headless local servers  
+- Developers who prefer native over container-based deployment  
 
-> ❗ This setup assumes you already have [Ollama](https://ollama.com) running on another machine (e.g. a Windows PC), accessible from the VM over the local network.
+> ⚠️ This assumes you already have **Ollama** running on another machine (e.g. a Windows PC), accessible from the VM over the local network.
 
 ---
 
 ## ✅ Features
 
-- 📦 Native installation without Docker
-- ⚙️ Installs all required dependencies (Python, Node.js, etc.)
-- 🔌 Connects to an external Ollama instance
-- 🖥️ Web interface available on port `3000`
-- 🔁 Optional `systemd` service to run at boot
+- Native install — no Docker  
+- Python + Node.js stack  
+- Web UI on port **3000**  
+- Optional autostart with `systemd`  
 
 ---
 
 ## 🖥 Requirements
 
-- Ubuntu Server 22.04 LTS (minimal install recommended)
-- Access to a running Ollama instance (e.g., `http://192.168.1.100:11434`)
-- At least **2 GB RAM**
-- Internet access during installation
+- Ubuntu Server 22.04 LTS (minimal install recommended)  
+- Ollama running elsewhere (e.g. `http://192.168.1.100:11434`)  
+- At least 2 GB RAM  
+- Internet access during setup  
 
 ---
 
@@ -35,35 +34,51 @@ It’s perfect for:
 SSH into your Ubuntu VM or use the VirtualBox console, then run:
 
 ```bash
-curl -sL https://your-github-username.github.io/openwebui-native-installer/install.sh | bash
+# Download the installer script
+curl -O https://your-github-username.github.io/openwebui-native-installer/install.sh
+
+# Make it executable
+chmod +x install.sh
+
+# Run the installer
+./install.sh
 ```
 
-The script will:
-1. Install required packages
-2. Clone the Open WebUI repository
-3. Set up the Python backend
-4. Build the frontend
-5. Create a basic `.env` file with a placeholder IP address
+> 💡 If you cloned the repo instead of downloading:
+> ```bash
+> chmod +x install.sh
+> ./install.sh
+> ```
+
+This will:
+- Install Python, Node.js, npm, etc.
+- Clone the Open WebUI repo
+- Set up Python venv and Node frontend
+- Create a `.env` file with default Ollama URL
 
 ---
 
 ## ⚙️ Configuration
 
-After installation, update the `.env` file located at:
+After install, edit the `.env` file in:
 
 ```bash
 ~/open-webui/backend/.env
 ```
 
-Change the line:
+Set the correct IP address for your Ollama server:
 
 ```env
 OLLAMA_API_BASE_URL=http://192.168.1.100:11434
 ```
 
-Replace `192.168.1.100` with the actual IP address of the machine running Ollama.
+Replace the IP with the actual address of your Ollama machine.
 
-Then start the app:
+---
+
+## ▶️ Running the App
+
+Start Open WebUI manually with:
 
 ```bash
 cd ~/open-webui/backend
@@ -73,38 +88,37 @@ python3 main.py
 
 ---
 
-## 🌐 Access the Web Interface
+## 🌐 Access the UI
 
-Open a browser (on your host PC or Android device) and go to:
+From your browser (on the same network):
 
 ```
 http://<your-vm-ip>:3000
 ```
 
-You’ll now be able to chat via Open WebUI, backed by the Ollama server on your Windows PC.
+---
+
+## 🔁 Autostart on Boot (Optional)
+
+To auto-start Open WebUI when the VM boots, see [postinstall.md](postinstall.md):
+
+```bash
+sudo systemctl enable openwebui
+sudo systemctl start openwebui
+```
 
 ---
 
-## 🔁 Optional: Auto-start at Boot
+## 🧹 Uninstall
 
-To run Open WebUI automatically after reboot, set up a `systemd` service.
-
-See instructions in:
-
-📄 [`postinstall.md`](postinstall.md)
-
----
-
-## 🧹 Uninstall Instructions
-
-To completely remove the setup:
+To fully remove everything:
 
 ```bash
 rm -rf ~/open-webui
 sudo apt remove --purge -y nodejs npm python3-pip git
 ```
 
-If you created a `systemd` service, disable and remove it:
+Also remove the systemd service if created:
 
 ```bash
 sudo systemctl disable openwebui
@@ -114,15 +128,14 @@ sudo systemctl daemon-reload
 
 ---
 
-## 📸 Screenshots
+## 📄 License
 
-You can add screenshots here showing:
-- The terminal installation
-- The web interface in your browser
-- Sample chats powered by Ollama
+This project is licensed under the MIT License — see [LICENSE](LICENSE)
 
 ---
 
-## 📄 License
+## 🙌 Credits
 
-This project is licensed under the [MIT License](LICENSE).
+Open WebUI is developed at [github.com/open-webui/open-webui](https://github.com/open-webui/open-webui)
+
+This installer project is a community contribution for native deployment.
