@@ -1,4 +1,4 @@
-# 🧠 Native Open WebUI Installer (No Docker)
+# 🧠 Native Open WebUI Installer for Ollama (No Docker) 
 
 This project provides a lightweight script to install **Open WebUI** natively on a minimal Ubuntu Server 22.04 LTS machine — without Docker.
 
